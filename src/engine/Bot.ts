@@ -3,6 +3,7 @@ import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
 import { ArubickLexer } from '../antlr/ArubickLexer';
 import { ArubickParser } from '../antlr/ArubickParser';
 import BotVisitor from './visitor/BotVisitor';
+import ExpressionSolver from './solver/ExpressionSolver';
 
 export default class Bot {
   private source: string;
@@ -27,5 +28,8 @@ export default class Bot {
     const parser = new ArubickParser(tokenStream);
 
     const visitor = new BotVisitor();
+    visitor.visit(parser.program());
+    const solver = new ExpressionSolver();
+    console.dir(solver.solve(visitor.getData().storage.intent.greet.value));
   }
 }
