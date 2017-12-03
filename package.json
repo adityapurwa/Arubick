@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "antlr4": "^4.7.0",
+    "antlr4ts": "^0.4.1-alpha.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.53",
+    "antlr4ts-cli": "^0.4.0-alpha.4"
+  },
+  "scripts": {
+    "gantlr": "antlr4ts -visitor src/antlr/Arubick.g4 -o src/antlr",
+    "test": "tsc && node test/random.js"
+  }
+}
