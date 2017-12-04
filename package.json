@@ -5,10 +5,12 @@
   },
   "devDependencies": {
     "@types/node": "^8.0.53",
-    "antlr4ts-cli": "^0.4.0-alpha.4"
+    "antlr4ts-cli": "^0.4.0-alpha.4",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.2"
   },
   "scripts": {
     "gantlr": "antlr4ts -visitor src/antlr/Arubick.g4 -o src/antlr",
-    "test": "tsc && node test/random.js"
+    "test": "tsc && node dist/test/random.js"
   }
 }

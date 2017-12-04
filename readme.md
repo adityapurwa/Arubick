@@ -18,29 +18,20 @@ def intent/greet = [
     "hello"
 ]
 
-def entity/number = regex("[0-9]+")
-def entity/between = [
-    "between ${start@entity/number} - ${end@entity/number}",
-    "between ${start@entity/number} and ${end@entity/number}",
-    "between ${start@entity/number} to ${end@entity/number}"
-]
-
 main {
-    say("Hello, I am random bot.")
     def message = await reply()
     if message is intent/greet {
-        say("Hi too!")
-    }
-    if message is intent/query {
-        def random = 0
-        if message is intent/between {
-            def extract = intent/between(message)
-            ext/random(extract.start, extract.end)
-        }else{
-            ext/random()
+        say("Hi! I am random bot, ask me for a random number.")
+        restart()
+    } else {
+        if message is intent/query {
+            def random = ext/random()
+            say("Generated random number ${random}")
+            restart()
+        } else {
+            say("Sorry, I don't understand")
+            restart()
         }
-
-        say("Generated random number ${random}")
     }
 }
 ```
@@ -63,6 +54,17 @@ if extract {
     say("...")
 }
 ```
+
+## Running Example
+
+To run the example, run the command below
+
+```
+npm run test
+```
+
+Make sure to install the dependencies first (including development
+dependencies).
 
 Where `ext/intentQuery` above is defined as external natural language processor.
 
